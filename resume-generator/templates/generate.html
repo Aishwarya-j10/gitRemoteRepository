@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Resume</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Generate Your Resume</h1>
+<form action="{{ url_for('generate') }}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" name="name" required><br>
+    <label for="email">Email:</label>
+    <input type="email" name="email" required><br>
+    <label for="phone">Phone:</label>
+    <input type="tel" name="phone"><br>
+    <label for="address">Address:</label>
+    <input type="text" name="address"><br>
+    <label for="summary">Summary:</label>
+    <textarea name="summary" rows="4"></textarea><br>
+    <button type="submit">Generate</button>
+</form>
+    {% if resume %}
+    <h2>Your Generated Resume</h2>
+<p>Name: {{ resume['name'] }}</p>
+<p>Email: {{ resume['email'] }}</p>
+<p>Phone: {{ resume['phone'] }}</p>
+<p>Address: {{ resume['address'] }}</p>
+<p>Summary: {{ resume['summary'] }}</p>
+<a href="{{ url_for('download', **resume) }}">Download Resume</a>
+{% endif %}
+    <a href="{{ url_for('index') }}">Go Back</a>
+</body>
+</html>
